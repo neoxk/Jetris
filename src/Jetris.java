@@ -7,5 +7,9 @@ public class Jetris {
         contentPane.setLayout(null);
         contentPane.setBackground(Color.BLACK);
 
+        contentPane.add(new Square(0, 0));
+        contentPane.add(new Square(1, 0));
+        contentPane.setVisible(true);
+
     }
 }
