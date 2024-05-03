@@ -1,7 +1,5 @@
 package jetris;
 
-import jetris.pieces.Box;
-import jetris.pieces.Left_L;
 import jetris.pieces.Piece;
 
 import javax.swing.*;
@@ -15,20 +13,20 @@ public class Jetris implements Runnable{
     public Jetris(JFrame window) {
        this.window = window;
        displayedPieces = new ArrayList<>();
+
+       this.window.addKeyListener(new ControlsListener());
     }
 
     @Override
     public void run() {
-        Box box = new Box(0);
-        Left_L l = new Left_L(4);
-        displayedPieces.add(box);
-        displayedPieces.add(l);
-        window.getContentPane().add(box);
-        window.getContentPane().add(l);
+        Piece piece = Piece.newPiece();
+
+        displayedPieces.add(piece);
+        window.getContentPane().add(piece);
 
         while (true) {
             for (Piece p : displayedPieces) {
-                p.move();
+                p.newFrame();
             }
 
             window.validate();

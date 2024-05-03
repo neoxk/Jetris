@@ -1,6 +1,5 @@
 package jetris;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Path2D;
@@ -28,7 +27,7 @@ public class Square{
 
 
 
-    public void move() {
+    public void newFrame() {
         this.y += Const.SQUARE_SIZE;
     }
 
