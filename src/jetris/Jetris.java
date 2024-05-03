@@ -12,9 +12,11 @@ public class Jetris {
         contentPane.setBackground(Color.BLACK);
 
         Box box = new Box(0, 0);
-        for (Square square : box.getSquares()) {
-            contentPane.add(square);
-        }
+
+        contentPane.add(box);
+        contentPane.add(new Box(2, 1));
+        contentPane.add(new Box(1, 1));
+
 
         contentPane.setVisible(true);
 
