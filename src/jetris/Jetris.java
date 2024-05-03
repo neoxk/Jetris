@@ -24,17 +24,22 @@ public class Jetris implements Runnable{
         displayedPieces.add(piece);
         window.getContentPane().add(piece);
 
+
+        int ms_counter = 0;
         while (true) {
-            for (Piece p : displayedPieces) {
-                p.newFrame();
+            if (ms_counter >= 1000) {
+                for (Piece p : displayedPieces) {
+                    p.newFrame();
+                }
+                ms_counter = 0;
             }
 
             window.validate();
             window.repaint();
 
-
+            ms_counter += 20;
             try {
-                Thread.sleep(1000);
+                Thread.sleep(20);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

@@ -11,4 +11,8 @@ public class Const {
     public static final Color BOX_COLOR = Color.YELLOW;
     public static final Color LEFT_L_COLOR = Color.ORANGE;
     public static final Color RIGHT_L_COLOR = Color.BLUE;
+    public static final Color LINE_COLOR = Color.PINK;
+    public static final Color LEFT_ZIGZAG_COLOR = Color.GREEN;
+    public static final Color RIGHT_ZIGZAG_COLOR = Color.MAGENTA;
+    public static final Color T_COLOR = Color.RED;
 }
