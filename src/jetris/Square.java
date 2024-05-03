@@ -31,6 +31,13 @@ public class Square{
         this.y += Const.SQUARE_SIZE;
     }
 
+    public void moveLeft() {
+        this.x -= Const.SQUARE_SIZE;
+    }
+    public void moveRight() {
+        this.x += Const.SQUARE_SIZE;
+    }
+
     public static Shape merge(Square[] squares) {
         GeneralPath mergedPath = new GeneralPath();
         for (Square square : squares) {
