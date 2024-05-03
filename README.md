@@ -1,2 +1,2 @@
-# Jetris
-# Jetris
+# jetris.Jetris
+# jetris.Jetris

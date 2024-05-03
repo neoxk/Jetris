@@ -1,3 +1,5 @@
+package jetris;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,10 +9,9 @@ public class Square extends JComponent {
 
     public Square(int x, int y) {
        this.x = x;
-       this.y = y;
-       int square_size = Const.GAME_VIEW_SIZE.width / Const.NUM_SQUARES_WIDTH;
-         setSize(square_size, square_size);
-         setLocation(x * square_size, y * square_size);
+       this.y = y;;
+       setSize(Const.SQUARE_SIZE, Const.SQUARE_SIZE);
+       setLocation(x * Const.SQUARE_SIZE, y * Const.SQUARE_SIZE);
     }
 
     @Override
