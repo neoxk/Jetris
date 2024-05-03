@@ -3,41 +3,42 @@ package jetris.pieces;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Path2D;
+import java.util.ArrayList;
 
 import jetris.Const;
 import jetris.Square;
 
 public abstract class Piece extends JComponent {
-    private Point[] pathPoints;
+    private ArrayList<Square> squares = new ArrayList<>();
     private Color color;
-    public Piece(Point[] points, Color color) {
-        pathPoints = points;
+    public Piece(Color color, Point...points) {
+        for (Point p : points) {
+            squares.add(new Square(p.x, p.y, color));
+        }
+
         this.color = color;
-        setLocation(pathPoints[0]);
+        setLocation(points[0].getLocation());
         setSize(Const.GAME_VIEW_SIZE);
     }
 
     @Override
     public void paintComponent(Graphics gg) {
+        Shape piece = Square.merge(squares.toArray(new Square[0]));
         Graphics2D g = (Graphics2D) gg;
-        Path2D.Double path = new Path2D.Double();
-
-        path.moveTo(pathPoints[0].x * Const.SQUARE_SIZE, pathPoints[0].y * Const.SQUARE_SIZE);
-        for (int i = 1; i < pathPoints.length; i++) {
-            path.lineTo(pathPoints[i].x * Const.SQUARE_SIZE, pathPoints[i].y * Const.SQUARE_SIZE);
-        }
-        path.closePath();
-
-
         g.setColor(color);
-        g.fill(path);
+        g.fill(piece);
     }
 
     public void move() {
-       for (int i = 0; i < pathPoints.length; i++) {
-           int curr_x = pathPoints[i].x;
-           int curr_y = pathPoints[i].y;
-           pathPoints[i] = new Point(curr_x, curr_y + 1);
+        for (Square square : squares) square.move();
+    }
+
+    public void newPiece() {
+       int rand_x = (int) (Math.random() * (Const.GAME_VIEW_SIZE.width / Const.SQUARE_SIZE));
+       int rand_piece = (int) (Math.random() * 8);
+       switch (rand_piece) {
+           case 0:
+               new Box(rand_x);
        }
     }
     public void rotate() {}

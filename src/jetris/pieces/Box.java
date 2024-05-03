@@ -6,12 +6,13 @@ import jetris.Square;
 import java.awt.*;
 
 public class Box extends Piece {
-    public Box(int start_x, int start_y) {
-        super(new Point[]{
-                new Point(start_x, start_y),
-                new Point(start_x + 1, start_y),
-                new Point(start_x + 1, start_y + 1),
-                new Point(start_x, start_y + 1)
-        }, Const.BOX_COLOR);
+    public Box(int start_x) {
+        super(
+                Const.BOX_COLOR,
+                new Point(start_x, 0),
+                new Point(start_x + 1, 0),
+                new Point(start_x + 1, 1),
+                new Point(start_x, 1)
+        );
     }
 }
