@@ -1,24 +1,41 @@
 package jetris;
 
 import jetris.pieces.Box;
+import jetris.pieces.Piece;
 
+import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
-public class Jetris {
-    public static void main(String[] args) {
-        Container contentPane = new Frame().getContentPane();
+public class Jetris implements Runnable{
+    private ArrayList<Piece> pieces;
+    private JFrame window;
 
-        contentPane.setLayout(null);
-        contentPane.setBackground(Color.BLACK);
+    public Jetris(JFrame window) {
+       this.window = window;
+       pieces = new ArrayList<>();
+    }
 
-        Box box = new Box(0, 0);
+    @Override
+    public void run() {
+        while (true) {
+            Box box = new Box((int) (Math.random() * Const.NUM_SQUARES_WIDTH), 0);
+            pieces.add(box);
+            window.getContentPane().add(box);
 
-        contentPane.add(box);
-        contentPane.add(new Box(2, 1));
-        contentPane.add(new Box(1, 1));
+            for (Piece p : pieces) {
+                p.move();
+            }
+
+            window.validate();
+            window.repaint();
 
 
-        contentPane.setVisible(true);
-
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
