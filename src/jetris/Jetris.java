@@ -1,6 +1,7 @@
 package jetris;
 
 import jetris.pieces.Piece;
+import jetris.pieces.PieceFactory;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class Jetris implements Runnable{
 
     @Override
     public void run() {
-        Piece piece = Piece.newPiece();
+        Piece piece = PieceFactory.newPiece();
 
         displayedPieces.add(piece);
         window.getContentPane().add(piece);
