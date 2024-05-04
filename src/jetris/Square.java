@@ -5,14 +5,26 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Path2D;
 
 public class Square{
-    public int x;
-    public int y;
+    private int x;
+    private int y;
 
     public Square(int x, int y) {
        this.x = x * Const.SQUARE_SIZE;
        this.y = y * Const.SQUARE_SIZE;
     }
 
+    public int getX() {
+        return x / Const.SQUARE_SIZE;
+    }
+    public int getY() {
+        return y / Const.SQUARE_SIZE;
+    }
+    public void setX(int x) {
+        this.x = x * Const.SQUARE_SIZE;
+    }
+    public void setY(int y) {
+        this.y = y * Const.SQUARE_SIZE;
+    }
 
     public Shape getShape() {
         Path2D.Double path = new Path2D.Double();

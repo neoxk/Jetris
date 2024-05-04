@@ -20,7 +20,7 @@ public abstract class Piece extends JComponent implements Listener {
 
         EventBus.subscribe_controller(this);
 
-        setLocation(squares.getFirst().x, squares.getFirst().y);
+        setLocation(0, 0);
         setSize(Const.GAME_VIEW_SIZE);
     }
     @Override public void paintComponent(Graphics gg) {
@@ -32,17 +32,22 @@ public abstract class Piece extends JComponent implements Listener {
 
     public void newFrame() {
         for (Square square : squares) {
-            square.y ++;
+            int prevY = square.getY();
+            square.setY(prevY + 1);
         }
     }
 
     private void moveLeft() {
         for (Square square : squares) {
-            square.x --;
+            int prevX = square.getX();
+            square.setX(prevX - 1);
         }
     }
     private void moveRight() {
-        for (Square square : squares) square.x ++;
+        for (Square square : squares) {
+            int prevX = square.getX();
+            square.setX(prevX + 1);
+        }
     }
 
 
