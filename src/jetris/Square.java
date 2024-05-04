@@ -5,10 +5,10 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Path2D;
 
 public class Square{
-    private int x;
-    private int y;
+    public int x;
+    public int y;
 
-    public Square(int x, int y, Color color) {
+    public Square(int x, int y) {
        this.x = x * Const.SQUARE_SIZE;
        this.y = y * Const.SQUARE_SIZE;
     }
@@ -23,18 +23,6 @@ public class Square{
         return path;
     }
 
-    public int getX() {
-        return x;
-    }
-    public int getY() {
-        return y;
-    }
-    public void setX(int x) {
-        this.x = x;
-    }
-    public void setY(int y) {
-        this.y = y;
-    }
 
 
     public static Shape merge(Square[] squares) {

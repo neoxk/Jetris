@@ -3,6 +3,7 @@ package jetris.pieces;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import jetris.Const;
 import jetris.Square;
@@ -13,20 +14,16 @@ import jetris.events.Event;
 public abstract class Piece extends JComponent implements Listener {
     private ArrayList<Square> squares = new ArrayList<>();
     private final Color color;
-    public Piece(Color color, Point...points) {
-        for (Point p : points) {
-            squares.add(new Square(p.x, p.y, color));
-        }
+    public Piece(Color color, Square...addedSquares) {
+        this.squares.addAll(Arrays.asList(addedSquares));
         this.color = color;
 
         EventBus.subscribe_controller(this);
 
-        setLocation(points[0].getLocation());
+        setLocation(squares.getFirst().x, squares.getFirst().y);
         setSize(Const.GAME_VIEW_SIZE);
     }
-
-    @Override
-    public void paintComponent(Graphics gg) {
+@Override public void paintComponent(Graphics gg) {
         Shape piece = Square.merge(squares.toArray(new Square[0]));
         Graphics2D g = (Graphics2D) gg;
         g.setColor(color);
@@ -34,14 +31,18 @@ public abstract class Piece extends JComponent implements Listener {
     }
 
     public void newFrame() {
-        for (Square square : squares) square.newFrame();
+        for (Square square : squares) {
+            square.y ++;
+        }
     }
 
     private void moveLeft() {
-        for (Square square : squares) square.moveLeft();
+        for (Square square : squares) {
+            square.x --;
+        }
     }
     private void moveRight() {
-        for (Square square : squares) square.moveRight();
+        for (Square square : squares) square.x ++;
     }
 
     public static Piece newPiece() {
