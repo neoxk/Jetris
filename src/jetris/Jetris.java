@@ -7,13 +7,13 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Jetris implements Runnable{
-    private ArrayList<Piece> displayedPieces;
+    private ArrayList<Square> gameBoard = new ArrayList<>();
+    private Piece activePiece;
 
     private JFrame window;
 
     public Jetris(JFrame window) {
        this.window = window;
-       displayedPieces = new ArrayList<>();
 
        this.window.addKeyListener(new ControlsListener());
     }
@@ -21,17 +21,15 @@ public class Jetris implements Runnable{
     @Override
     public void run() {
         Piece piece = PieceFactory.newPiece();
+        activePiece = piece;
 
-        displayedPieces.add(piece);
-        window.getContentPane().add(piece);
+        window.getContentPane().add(activePiece);
 
 
         int ms_counter = 0;
         while (true) {
             if (ms_counter >= 1000) {
-                for (Piece p : displayedPieces) {
-                    p.newFrame();
-                }
+                activePiece.newFrame();
                 ms_counter = 0;
             }
 

@@ -13,6 +13,7 @@ public class Square{
        this.y = y * Const.SQUARE_SIZE;
     }
 
+
     public Shape getShape() {
         Path2D.Double path = new Path2D.Double();
         path.moveTo(x, y);

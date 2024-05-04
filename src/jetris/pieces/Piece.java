@@ -23,7 +23,7 @@ public abstract class Piece extends JComponent implements Listener {
         setLocation(squares.getFirst().x, squares.getFirst().y);
         setSize(Const.GAME_VIEW_SIZE);
     }
-@Override public void paintComponent(Graphics gg) {
+    @Override public void paintComponent(Graphics gg) {
         Shape piece = Square.merge(squares.toArray(new Square[0]));
         Graphics2D g = (Graphics2D) gg;
         g.setColor(color);
