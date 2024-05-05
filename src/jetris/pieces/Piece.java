@@ -7,9 +7,6 @@ import java.util.Arrays;
 
 import jetris.Const;
 import jetris.Square;
-import jetris.events.EventBus;
-import jetris.events.Listener;
-import jetris.events.Event;
 
 public abstract class Piece extends JComponent{
     private ArrayList<Square> squares = new ArrayList<>();
@@ -27,6 +24,8 @@ public abstract class Piece extends JComponent{
         Graphics2D g = (Graphics2D) gg;
         g.setColor(color);
         g.fill(piece);
+        g.setColor(Color.white);
+        g.draw(piece);
     }
 
     public Square[] getSquares() {
@@ -54,9 +53,20 @@ public abstract class Piece extends JComponent{
         }
     }
 
+    public void rotate() {
+        Square pivot = squares.getFirst();
+        int pivotX = pivot.getX();
+        int pivotY = pivot.getY();
 
+        for (Square square : squares) {
+            int prevX = square.getX();
+            int prevY = square.getY();
 
+            int newX = prevY - pivotY + pivotX;
+            int newY = pivotX - prevX + pivotY;
 
-
-    public void rotate() {}
+            square.setX(newX);
+            square.setY(newY);
+        }
+    }
 }

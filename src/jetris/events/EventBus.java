@@ -1,25 +1,15 @@
 package jetris.events;
 
+import jetris.pieces.Line;
+
 import java.util.ArrayList;
 
 public class EventBus {
-    public static ArrayList<Listener> controlsListeners = new ArrayList<>();
 
-    public static void subscribe_controller(Listener listener) {
-        controlsListeners.add(listener);
-    }
-
-    public static void unsubscribe_controller(Listener listener) {
-        controlsListeners.remove(listener);
-    }
+    private static ArrayList<LineRemoveListener> lineRemoveListeners = new ArrayList<>();
 
     public static void dispatch(Event e) {
-        switch (e.getType()) {
-            case Event.CONTROLLER_INPUT:
-                for (Listener listener : controlsListeners) listener.listen(e); break;
-
-        }
-
+        for (LineRemoveListener listener : lineRemoveListeners) listener.lineRemoved(0);
     }
 
 }

@@ -9,20 +9,19 @@ import java.awt.event.KeyListener;
 
 public class ControlsListener extends KeyAdapter {
 
+    private Jetris gameController;
+
+    public ControlsListener(Jetris gameController) {
+        this.gameController = gameController;
+    }
+
    @Override
    public void keyPressed(KeyEvent e) {
        switch (e.getKeyCode()) {
-           case KeyEvent.VK_RIGHT:
-               EventBus.dispatch(new Event(Event.CONTROLLER_INPUT, Event.CONTROLLER_VK_RIGHT));
+           case KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_DOWN, KeyEvent.VK_SPACE:
+               gameController.listen(e);
                break;
-           case KeyEvent.VK_LEFT:
-               EventBus.dispatch(new Event(Event.CONTROLLER_INPUT, Event.CONTROLLER_VK_LEFT));
-               break;
-           case KeyEvent.VK_DOWN:
-               EventBus.dispatch(new Event(Event.CONTROLLER_INPUT, Event.CONTROLLER_VK_DOWN));
-           case KeyEvent.VK_SPACE:
-               System.out.println("Rotate");
-               break;
+
        }
    }
 }

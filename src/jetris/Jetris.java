@@ -1,14 +1,13 @@
 package jetris;
 
-import jetris.events.Event;
-import jetris.events.EventBus;
-import jetris.events.Listener;
 import jetris.pieces.Piece;
 import jetris.pieces.PieceFactory;
 
+import java.awt.event.KeyEvent;
+
 import javax.swing.*;
 
-public class Jetris implements Runnable, Listener {
+public class Jetris implements Runnable {
     private boolean[][] gameBoard = new boolean[Const.GAME_VIEW_SIZE.width / Const.SQUARE_SIZE][(Const.GAME_VIEW_SIZE.height / Const.SQUARE_SIZE) - 1];
     private Piece activePiece;
 
@@ -17,8 +16,19 @@ public class Jetris implements Runnable, Listener {
     public Jetris(JFrame window) {
        this.window = window;
 
-        EventBus.subscribe_controller(this);
-       this.window.addKeyListener(new ControlsListener());
+       this.window.addKeyListener(new ControlsListener(this));
+    }
+
+    private boolean checkFullRow() {
+        for (int row = 0; row < gameBoard.length; row ++) {
+            boolean fullRow = true;
+          for (int col = 0; col < gameBoard[0].length; col++) {
+              if (gameBoard[row][row] == false) fullRow = false;
+          }
+
+        }
+
+        return true;
     }
 
     private void land(Piece p) {
@@ -101,16 +111,18 @@ public class Jetris implements Runnable, Listener {
         }
     }
 
-    @Override
-    public void listen(Event e) {
-        switch (e.getPayload()) {
-            case Event.CONTROLLER_VK_LEFT:
+    public void listen(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
                 System.out.println(canMoveLeft());
                 if (canMoveLeft()) activePiece.moveLeft(); break;
-            case Event.CONTROLLER_VK_RIGHT:
+            case KeyEvent.VK_RIGHT:
                 if (canMoveRight()) activePiece.moveRight(); break;
-            case Event.CONTROLLER_VK_DOWN:
-                if (canDropdown()) activePiece.dropdown();break;
+            case KeyEvent.VK_DOWN:
+                if (canDropdown()) activePiece.dropdown();
+                break;
+            case KeyEvent.VK_SPACE:
+                activePiece.rotate(); break;
         }
     }
 }

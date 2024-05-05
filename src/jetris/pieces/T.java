@@ -12,7 +12,7 @@ public class T extends Piece{
                 new Square(start_x, start_y),
                 new Square(start_x - 1, start_y),
                 new Square(start_x + 1, start_y),
-                new Square(start_x + 1, start_y)
+                new Square(start_x, start_y + 1)
         );
     }
 }
