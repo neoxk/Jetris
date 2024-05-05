@@ -11,14 +11,13 @@ import jetris.events.EventBus;
 import jetris.events.Listener;
 import jetris.events.Event;
 
-public abstract class Piece extends JComponent implements Listener {
+public abstract class Piece extends JComponent{
     private ArrayList<Square> squares = new ArrayList<>();
     private final Color color;
     public Piece(Color color, Square...addedSquares) {
         this.squares.addAll(Arrays.asList(addedSquares));
         this.color = color;
 
-        EventBus.subscribe_controller(this);
 
         setLocation(0, 0);
         setSize(Const.GAME_VIEW_SIZE);
@@ -30,20 +29,25 @@ public abstract class Piece extends JComponent implements Listener {
         g.fill(piece);
     }
 
-    public void newFrame() {
+    public Square[] getSquares() {
+        return squares.toArray(new Square[0]);
+    }
+
+
+    public void dropdown() {
         for (Square square : squares) {
             int prevY = square.getY();
             square.setY(prevY + 1);
         }
     }
 
-    private void moveLeft() {
+    public void moveLeft() {
         for (Square square : squares) {
             int prevX = square.getX();
             square.setX(prevX - 1);
         }
     }
-    private void moveRight() {
+    public void moveRight() {
         for (Square square : squares) {
             int prevX = square.getX();
             square.setX(prevX + 1);
@@ -51,12 +55,7 @@ public abstract class Piece extends JComponent implements Listener {
     }
 
 
-    public void listen(Event e) {
-       switch(e.getPayload()) {
-           case Event.CONTROLLER_VK_LEFT: moveLeft(); break;
-           case Event.CONTROLLER_VK_RIGHT: moveRight(); break;
-       }
-    }
+
 
 
     public void rotate() {}

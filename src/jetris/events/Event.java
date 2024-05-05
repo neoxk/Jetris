@@ -8,6 +8,7 @@ public class Event {
 
     public static final int CONTROLLER_VK_LEFT = 0;
     public static final int CONTROLLER_VK_RIGHT = 1;
+    public static final int CONTROLLER_VK_DOWN = 3;
     public static final int CONTROLLER_VK_SPACE = 2;
 
 

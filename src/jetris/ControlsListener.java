@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class ControlsListener extends KeyAdapter {
+
    @Override
    public void keyPressed(KeyEvent e) {
        switch (e.getKeyCode()) {
@@ -17,6 +18,8 @@ public class ControlsListener extends KeyAdapter {
            case KeyEvent.VK_LEFT:
                EventBus.dispatch(new Event(Event.CONTROLLER_INPUT, Event.CONTROLLER_VK_LEFT));
                break;
+           case KeyEvent.VK_DOWN:
+               EventBus.dispatch(new Event(Event.CONTROLLER_INPUT, Event.CONTROLLER_VK_DOWN));
            case KeyEvent.VK_SPACE:
                System.out.println("Rotate");
                break;

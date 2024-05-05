@@ -4,7 +4,7 @@ import jetris.Const;
 
 public class PieceFactory {
     public static Piece newPiece() {
-        int rand_x = (int) (Math.random() * (Const.GAME_VIEW_SIZE.width / Const.SQUARE_SIZE));
+        int rand_x = (int) (Const.NUM_SQUARES_WIDTH / 4 + (Math.random() * (Const.NUM_SQUARES_WIDTH / 2)));
         int rand_piece = (int) (Math.random() * 7);
         switch (rand_piece) {
             case 0: return new Box(rand_x, 0);
